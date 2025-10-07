@@ -327,47 +327,57 @@
             <label class="text-sm text-slate-700">Mensaje</label>
             <textarea rows="4" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-200" placeholder="Objetivos, plazos y cómo podemos ayudar"></textarea>
           </div>
-          <div class="flex items-center justify-between gap-3">
-            <div class="text-xs text-slate-500">Al enviar, acepta ser contactado por SustTech<span class="align-top text-[10px] ml-0.5">™</span>.</div>
-            <button type="submit" class="rounded-xl px-5 py-
+                    <div class="flex items-center justify-between gap-3">
+            <div class="text-xs text-slate-500">
+              Al enviar, acepta ser contactado por SustTech
+              <span class="align-top text-[10px] ml-0.5">™</span>.
+            </div>
+            <button
+              type="submit"
+              class="rounded-xl px-5 py-3 bg-slate-900 text-white hover:bg-slate-800 transition">
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
 
+  <!-- Chart.js and sparkline for Emisiones (tCO₂e) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById("emissionsChart");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
 
+      // Brand gradient (emerald -> sky)
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+      gradient.addColorStop(0, "#10b981"); // emerald-500
+      gradient.addColorStop(1, "#0ea5e9"); // sky-500
 
-
-            <!-- Chart.js and sparkline for Emisiones (tCO₂e) -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const canvas = document.getElementById("emissionsChart");
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-
-    // Nice brand gradient (emerald -> sky)
-    const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-    gradient.addColorStop(0, "#10b981"); // emerald-500
-    gradient.addColorStop(1, "#0ea5e9"); // sky-500
-
-    new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: ["2021", "2022", "2023", "2024"],
-        datasets: [{
-          data: [100, 92, 86, 82],     // sample: ↓ emissions
-          tension: 0.35,
-          borderColor: gradient,
-          borderWidth: 2,
-          pointRadius: 0,
-          fill: false
-        }]
-      },
-      options: {
-        animation: { duration: 800 },   // subtle draw-in
-        plugins: { legend: { display: false }, tooltip: { enabled: false } },
-        scales: { x: { display: false }, y: { display: false } },
-        elements: { line: { borderJoinStyle: "round" } },
-        maintainAspectRatio: false
-      }
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: ["2021", "2022", "2023", "2024"],
+          datasets: [{
+            data: [100, 92, 86, 82],   // sample: emisiones bajando
+            tension: 0.35,
+            borderColor: gradient,
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false
+          }]
+        },
+        options: {
+          animation: { duration: 800 },
+          plugins: { legend: { display: false }, tooltip: { enabled: false } },
+          scales: { x: { display: false }, y: { display: false } },
+          elements: { line: { borderJoinStyle: "round" } },
+          maintainAspectRatio: false
+        }
+      });
     });
-  });
-</script>
+  </script>
+</body>
+</html>
