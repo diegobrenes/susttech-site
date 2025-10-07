@@ -370,12 +370,15 @@
           }]
         },
         options: {
+          layout: { padding: { top: 6, bottom: 2 } },
           animation: { duration: 800 },
           plugins: { legend: { display: false }, tooltip: { enabled: false } },
           scales: { x: { display: false }, y: { display: false } },
           elements: { line: { borderJoinStyle: "round" } },
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+          clip: false
         }
+
       });
     });
   </script>
