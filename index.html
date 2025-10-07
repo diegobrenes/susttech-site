@@ -91,6 +91,7 @@
                 </div>
                 <div class="text-xs text-slate-500 mt-1">Año a año</div>
                 <canvas id="emissionsChart" class="mt-2 h-12 w-full"></canvas>
+
               </div>
               <div class="rounded-2xl border border-slate-200 p-4">
                 <div class="text-xs uppercase tracking-wider text-slate-500">Riesgo hídrico</div>
@@ -329,3 +330,44 @@
           <div class="flex items-center justify-between gap-3">
             <div class="text-xs text-slate-500">Al enviar, acepta ser contactado por SustTech<span class="align-top text-[10px] ml-0.5">™</span>.</div>
             <button type="submit" class="rounded-xl px-5 py-
+
+
+
+
+            <!-- Chart.js and sparkline for Emisiones (tCO₂e) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById("emissionsChart");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+
+    // Nice brand gradient (emerald -> sky)
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    gradient.addColorStop(0, "#10b981"); // emerald-500
+    gradient.addColorStop(1, "#0ea5e9"); // sky-500
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ["2021", "2022", "2023", "2024"],
+        datasets: [{
+          data: [100, 92, 86, 82],     // sample: ↓ emissions
+          tension: 0.35,
+          borderColor: gradient,
+          borderWidth: 2,
+          pointRadius: 0,
+          fill: false
+        }]
+      },
+      options: {
+        animation: { duration: 800 },   // subtle draw-in
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        scales: { x: { display: false }, y: { display: false } },
+        elements: { line: { borderJoinStyle: "round" } },
+        maintainAspectRatio: false
+      }
+    });
+  });
+</script>
