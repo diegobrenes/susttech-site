@@ -83,15 +83,18 @@
         <div class="aspect-[4/3] w-full rounded-3xl bg-gradient-to-br from-emerald-100 via-sky-100 to-amber-100 p-1">
           <div class="h-full w-full rounded-2xl bg-white grid grid-cols-2">
             <div class="p-6 flex flex-col gap-4 border-r border-slate-100">
-              <div class="rounded-2xl border border-slate-200 p-4">
+              <div class="rounded-2xl border border-slate-200 p-4 overflow-hidden">
                 <div class="text-xs uppercase tracking-wider text-slate-500">Emisiones (tCO₂e)</div>
                 <div class="mt-1 flex items-baseline gap-2">
                   <div class="text-2xl font-semibold">↓ 18%</div>
                   <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">Mejora</span>
                 </div>
                 <div class="text-xs text-slate-500 mt-1">Año a año</div>
-                <canvas id="emissionsChart" class="mt-2 h-12 w-full"></canvas>
 
+                <!-- Give it a real height and prevent interactions/overlay issues -->
+                <canvas id="emissionsChart"
+                        class="mt-2 block h-12 min-h-[48px] w-full pointer-events-none"
+                        style="display:block;"></canvas>
               </div>
               <div class="rounded-2xl border border-slate-200 p-4">
                 <div class="text-xs uppercase tracking-wider text-slate-500">Riesgo hídrico</div>
@@ -344,43 +347,73 @@
   </section>
 
   <!-- Chart.js and sparkline for Emisiones (tCO₂e) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const canvas = document.getElementById("emissionsChart");
       if (!canvas) return;
-      const ctx = canvas.getContext("2d");
 
-      // Brand gradient (emerald -> sky)
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-      gradient.addColorStop(0, "#10b981"); // emerald-500
-      gradient.addColorStop(1, "#0ea5e9"); // sky-500
+      let chart;
 
-      new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: ["2021", "2022", "2023", "2024"],
-          datasets: [{
-            data: [100, 92, 86, 82],   // sample: emisiones bajando
-            tension: 0.35,
-            borderColor: gradient,
-            borderWidth: 2,
-            pointRadius: 0,
-            fill: false
-          }]
-        },
-        options: {
-          layout: { padding: { top: 6, bottom: 2 } },
-          animation: { duration: 800 },
-          plugins: { legend: { display: false }, tooltip: { enabled: false } },
-          scales: { x: { display: false }, y: { display: false } },
-          elements: { line: { borderJoinStyle: "round" } },
-          maintainAspectRatio: false,
-          clip: false
-        }
+      // Build chart with current canvas size (after layout)
+      const buildChart = () => {
+        const ctx = canvas.getContext("2d");
 
+        // Ensure canvas has a real height (fallback if CSS hasn't applied yet)
+        canvas.height = canvas.clientHeight || 48;
+
+        // Use current width for a proper gradient
+        const w = Math.max(100, canvas.getBoundingClientRect().width || 100);
+        const gradient = ctx.createLinearGradient(0, 0, w, 0);
+        gradient.addColorStop(0, "#10b981"); // emerald-500
+        gradient.addColorStop(1, "#0ea5e9"); // sky-500
+
+        return new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: ["2021", "2022", "2023", "2024"],
+            datasets: [{
+              data: [100, 92, 86, 82], // sample downward trend
+              tension: 0.35,
+              borderColor: gradient,
+              borderWidth: 2,
+              pointRadius: 0,
+              fill: false,
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: { padding: { top: 6, bottom: 2 } },
+            animation: { duration: 800 },
+            plugins: {
+              legend: { display: false },
+              tooltip: { enabled: false }
+            },
+            scales: { x: { display: false }, y: { display: false } },
+            elements: { line: { borderJoinStyle: "round" } },
+            // avoid clipping artifacts
+            clip: false,
+          }
+        });
+      };
+
+      // Defer until layout stabilizes
+      const init = () => {
+        if (chart) chart.destroy();
+        chart = buildChart();
+      };
+
+      // Wait one frame so the element has its final size
+      requestAnimationFrame(init);
+
+      // Rebuild on resize so the gradient matches the new width
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          init();
+        }, 150);
       });
     });
   </script>
-</body>
-</html>
+
