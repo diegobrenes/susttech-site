@@ -1,4 +1,6 @@
 <!doctype html>
+<!-- sustTech.com pagina web en español -->
+
 <html class="scroll-smooth" lang="es">
 
 <head>
@@ -9,6 +11,8 @@
   <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
@@ -65,12 +69,12 @@
 
   <!-- Hero -->
   <section class="relative overflow-hidden">
-    <div class="mx-auto max-w-7xl px-6 pt-12 pb-8 md:pt-18 md:pb-14 grid md:grid-cols-2 gap-10 items-center">
+    <div class="mx-auto max-w-7xl px-6 pt-12 pb-8 md:pt-20 md:pb-14 grid md:grid-cols-2 gap-10 items-center">
       <div>
         <h1 class="text-4xl md:text-6xl font-semibold leading-tight tracking-tight">
           Aceleramos la transición <span class="bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-transparent">sostenible</span> de su organización
         </h1>
-        <p class="mt-5 text-lg text-slate-600 max-w-l">
+        <p class="mt-5 text-lg text-slate-600 max-w-xl">
           Consultoría estratégica y técnica en ESG, finanzas sostenibles y medición de impacto. Combinamos rigor financiero con ciencia de datos y tecnología aplicada para habilitar decisiones claras y
           <span class="font-medium text-slate-700">viables</span> en sostenibilidad, rentabilidad y evidencia.
         </p>
@@ -364,61 +368,116 @@
       </div>
 
       <!-- FORMULARIO -->
-      <form class="mt-8 grid gap-4" onsubmit="event.preventDefault(); alert('Gracias, nos pondremos en contacto.');">
+      <form id="contactForm" class="mt-6 grid gap-4">
+        <!-- Honeypot (hidden) -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden">
+
         <div class="grid md:grid-cols-2 gap-4">
           <div>
             <label class="text-sm text-slate-700">Nombre</label>
-            <input class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-200" placeholder="Nombre y apellido">
+            <input name="name" required
+                class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-200"
+                placeholder="Nombre y apellido">
           </div>
-          <div>
-            <label class="text-sm text-slate-700">Email</label>
-            <input type="email" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-200" placeholder="nombre@empresa.com">
-          </div>
-        </div>
-
         <div>
-          <label class="text-sm text-slate-700">Organización</label>
-          <input class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-200" placeholder="Empresa / institución">
+          <label class="text-sm text-slate-700">Email</label>
+          <input type="email" name="email" required
+                class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-200"
+                placeholder="nombre@empresa.com">
         </div>
+      </div>
 
-        <div>
-          <label class="text-sm text-slate-700">Interés principal</label>
-          <select class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-200">
-            <option>ESG / Due diligence</option>
-            <option>Finanzas sostenibles</option>
-            <option>Datos, paneles y GIS</option>
-            <option>Medición de impacto</option>
-            <option>Otro</option>
-          </select>
-        </div>
+      <div>
+        <label class="text-sm text-slate-700">Organización</label>
+        <input name="org"
+              class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-200"
+              placeholder="Empresa / institución">
+      </div>
 
-        <div>
-          <label class="text-sm text-slate-700">Mensaje</label>
-          <textarea rows="4" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-200"
-            placeholder="Puede incluir objetivos, plazos, necesidades o tipo de colaboración deseada."></textarea>
-        </div>
+      <div>
+        <label class="text-sm text-slate-700">Interés principal</label>
+        <select name="topic"
+              class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-200">
+          <option>ESG / Due diligence</option>
+          <option>Finanzas sostenibles</option>
+          <option>Datos, paneles y GIS</option>
+          <option>Otro</option>
+        </select>
+      </div>
 
-        <div class="flex items-center justify-between gap-3">
-          <div class="text-xs text-slate-500">
-            Al enviar, acepta ser contactado por SustTech
-            <span class="align-top text-[10px] ml-0.5">™</span>.
-          </div>
-          <button
-            type="submit"
-            class="rounded-xl px-5 py-3 bg-slate-900 text-white hover:bg-slate-800 transition">
-            Enviar
-          </button>
-        </div>
-      </form>
+      <div>
+        <label class="text-sm text-slate-700">Mensaje</label>
+        <textarea name="message" rows="4" required
+                class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-200"
+                placeholder="Objetivos, plazos y cómo podemos ayudar (máx. 5000 caracteres)"></textarea>
+      </div>
+
+      <div class="flex items-center justify-between gap-3">
+        <div class="text-xs text-slate-500">Al enviar, acepta ser contactado por SustTech<span class="align-top text-[10px] ml-0.5">™</span>.</div>
+        <button type="submit" class="rounded-xl px-5 py-3 bg-slate-900 text-white hover:bg-slate-800">
+          Enviar
+        </button>
+      </div>
+
+      <p id="formStatus" class="text-sm mt-3 text-slate-600 hidden" aria-live="polite"></p>
+
+    </form>
+
     </div>
   </div>
-</section>
-
-  
+</section>  
 
   <script>
     lucide.createIcons();
+  
+    const form = document.getElementById('contactForm');
+    const statusEl = document.getElementById('formStatus');
+
+    // Make status updates accessible
+  
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+  
+      // honeypot: if bots fill it, just stop silently
+      const hp = form.querySelector('input[name="_gotcha"]');
+      if (hp && hp.value) return;
+  
+      statusEl.classList.remove('hidden');
+      statusEl.textContent = 'Enviando…';
+  
+      // Collect fields (now names match API: name, email, org, topic, message)
+      const data = Object.fromEntries(new FormData(form).entries());
+  
+      // Simple length guard for message
+      if ((data.message || '').length > 5000) {
+        statusEl.textContent = 'El mensaje supera el máximo permitido (5000).';
+        return;
+      }
+  
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        // server returns { ok: true } on success
+        const out = await res.json().catch(() => ({}));
+
+        if (res.ok && out.ok) {
+          form.reset();
+          statusEl.textContent = '¡Gracias! Responderemos en 1–2 días hábiles.';
+        } else {
+          statusEl.textContent = out?.error
+            ? `No se pudo enviar: ${out.error}`
+            : 'No se pudo enviar el mensaje. Intente nuevamente o escriba a contact@susttech.com.';
+        }
+      } catch {
+        statusEl.textContent = 'Error de red. Intente nuevamente.';
+      }
+    });
   </script>
+
 
 
  </body>
