@@ -1,11 +1,10 @@
 // api/contact.js
 import nodemailer from "nodemailer";
 
-// ---- Basic in-memory rate-limit (best-effort; resets per lambda instance) ----
-const WINDOW_MS = 60 * 1000; // 1 minute
+// ---- simple in-memory rate limit ----
+const WINDOW_MS = 60 * 1000;
 const MAX_PER_WINDOW = 5;
 let hits = [];
-
 function rateLimited(ip) {
   const now = Date.now();
   hits = hits.filter(h => now - h.time < WINDOW_MS);
@@ -15,57 +14,49 @@ function rateLimited(ip) {
   return false;
 }
 
-// ---- Field guards ----
+// ---- field guards ----
 const MAX_MESSAGE_LEN = 5000;
 const MAX_NAME_LEN = 120;
 const MAX_ORG_LEN = 200;
 const MAX_INTEREST_LEN = 80;
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).json({ ok: false, error: "Method not allowed" });
-
+  if (req.method !== "POST") {
+    return res.status(405).json({ ok: false, error: "Method not allowed" });
+  }
   try {
-    // Content-Type can be JSON or form-encoded
-    let body = {};
     const ctype = (req.headers["content-type"] || "").toLowerCase();
-
-    if (ctype.includes("application/json")) {
-      body = req.body || {};
-    } else if (ctype.includes("application/x-www-form-urlencoded") || ctype.includes("multipart/form-data")) {
-      // Vercel parses urlencoded automatically only for pages/api in Next.js;
-      // in this generic function we assume JSON from the client for simplicity.
+    if (!ctype.includes("application/json")) {
       return res.status(400).json({ ok: false, error: "Send JSON body" });
-    } else {
-      // Try to parse anyway if runtime gave us an object
-      body = req.body || {};
     }
+    const body = req.body || {};
 
     const {
       name = "",
       email = "",
       organization = "",
       interest = "",
+      org = "",
+      topic = "",
       message = "",
-      _gotcha = "" // honeypot
+      _gotcha = ""
     } = body;
 
-    // ---- Honeypot (hidden field): if filled, drop silently ----
-    if (_gotcha && String(_gotcha).trim().length > 0) {
-      return res.status(200).json({ ok: true }); // pretend success to avoid bot tuning
+    if (_gotcha && String(_gotcha).trim()) {
+      return res.status(200).json({ ok: true });
     }
 
-    // ---- Rate limit by IP ----
-    const ip = req.headers["x-forwarded-for"]?.split(",")[0]?.trim() || req.socket?.remoteAddress || "unknown";
+    const ip = req.headers["x-forwarded-for"]?.split(",")[0]?.trim()
+      || req.socket?.remoteAddress || "unknown";
     if (rateLimited(ip)) {
       return res.status(429).json({ ok: false, error: "Too many requests, try again later." });
     }
 
-    // ---- Minimal validation ----
-    const clean = (s) => String(s || "").trim();
+    const clean = s => String(s || "").trim();
     const vName = clean(name).slice(0, MAX_NAME_LEN);
     const vEmail = clean(email).toLowerCase();
-    const vOrg = clean(organization).slice(0, MAX_ORG_LEN);
-    const vInterest = clean(interest).slice(0, MAX_INTEREST_LEN);
+    const vOrg = clean(organization || org).slice(0, MAX_ORG_LEN);
+    const vInterest = clean(interest || topic).slice(0, MAX_INTEREST_LEN);
     const vMessage = clean(message).slice(0, MAX_MESSAGE_LEN);
 
     if (!vName || !vEmail || !vMessage) {
@@ -76,24 +67,26 @@ export default async function handler(req, res) {
       return res.status(400).json({ ok: false, error: "Invalid email." });
     }
 
-    // ---- Create SMTP transporter (Microsoft 365) ----
-    // If your account uses MFA, use an "App Password" (preferred).
-    const transporter = nodemailer.createTransport({
-      host: "smtp.office365.com",
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.M365_USER, // e.g., diego@susttech.com
-        pass: process.env.M365_PASS  // mailbox password or app password
-      },
-      tls: {
-        // Ensure STARTTLS
-        ciphers: "TLSv1.2"
-      }
-    });
+    // ---- env mapping: prefer generic SMTP_* ; fallback to M365_* ----
+    const SMTP_HOST   = process.env.SMTP_HOST   || "smtp.office365.com";
+    const SMTP_PORT   = Number(process.env.SMTP_PORT || 587);
+    const SMTP_SECURE = String(process.env.SMTP_SECURE || "false").toLowerCase() === "true";
+    const SMTP_USER   = process.env.SMTP_USER   || process.env.M365_USER;
+    const SMTP_PASS   = process.env.SMTP_PASS   || process.env.M365_PASS;
+    const SMTP_FROM   = process.env.SMTP_FROM   || process.env.M365_USER || SMTP_USER;
+    const CONTACT_TO  = process.env.CONTACT_TO  || process.env.SMTP_TO   || SMTP_USER;
 
-    // ---- Compose email ----
-    const toAddress = process.env.CONTACT_TO || process.env.M365_USER;
+    if (!SMTP_USER || !SMTP_PASS) {
+      return res.status(500).json({ ok: false, error: "SMTP credentials missing." });
+    }
+
+    const transporter = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      secure: SMTP_SECURE, // false for STARTTLS on 587
+      auth: { user: SMTP_USER, pass: SMTP_PASS },
+      tls: { ciphers: "TLSv1.2" }
+    });
 
     const subject = `Nuevo contacto — ${vName}`;
     const text = [
@@ -102,7 +95,7 @@ export default async function handler(req, res) {
       `Organización: ${vOrg || "-"}`,
       `Interés: ${vInterest || "-"}`,
       "",
-      `Mensaje:`,
+      "Mensaje:",
       vMessage
     ].join("\n");
 
@@ -118,8 +111,8 @@ export default async function handler(req, res) {
     `;
 
     await transporter.sendMail({
-      from: `"SustTech Contact" <${process.env.M365_USER}>`,
-      to: toAddress,
+      from: `"SustTech Contact" <${SMTP_FROM}>`,
+      to: CONTACT_TO,
       replyTo: vEmail,
       subject,
       text,
@@ -133,7 +126,6 @@ export default async function handler(req, res) {
   }
 }
 
-// ---- tiny HTML escaper ----
 function escapeHtml(s) {
   return String(s)
     .replace(/&/g, "&amp;")
@@ -142,11 +134,6 @@ function escapeHtml(s) {
     .replace(/"/g, "&quot;");
 }
 
-// Optional: tell Vercel to keep default body size
 export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "100kb"
-    }
-  }
+  api: { bodyParser: { sizeLimit: "100kb" } }
 };
