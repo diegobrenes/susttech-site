@@ -1,6 +1,6 @@
-{
+{{
   "meta.title": "SustTech | ESG & Sustainable Finance Advisory",
-  "meta.description": "We accelerate your organization’s sustainable transition. Strategic and technical consulting in ESG, sustainable finance, and impact measurement.",
+  "meta.description": "Strategic and technical consulting in ESG, sustainable finance, and impact measurement. We combine financial rigor with data science to enable clear, bankable decisions.",
 
   "tagline": "ESG & Sustainable Finance Advisory",
 
@@ -10,39 +10,83 @@
   "nav.contact": "Contact",
 
   "cta.book": "Book a call",
+  "cta.talk": "Let’s talk",
+  "cta.view_services": "See services",
 
   "hero.title": "We accelerate your organization’s sustainable transition",
-  "hero.subtitle": "Strategic and technical consulting in ESG, sustainable finance, and impact measurement.",
-  "hero.button": "Discover our services",
+  "hero.subtitle": "Strategic and technical consulting in ESG, sustainable finance, and impact measurement. We combine financial rigor with applied data science and technology to enable clear, bankable decisions across sustainability, profitability, and evidence.",
+  "hero.availability": "Available for sustainability projects and advisory 2025–2026.",
 
-  "services.title": "Our services",
-  "services.item1": "Alignment with IFC Performance Standards, SASB/ISSB, CSRD",
-  "services.item2": "Integration of operational, environmental, satellite and financial data",
-  "services.item3": "LatAm-focused with a global reach",
+  "sectors.title": "Sectors & thematic areas",
+  "sectors.item1": "Companies & cooperatives (SMEs to large groups)",
+  "sectors.item2": "Financial institutions",
+  "sectors.item3": "Impact investors",
+  "sectors.item4": "Agroindustry & value chains",
 
-  "approach.title": "Our approach",
-  "approach.subtitle": "We combine financial rigor with data science to enable clear, bankable decisions.",
+  "topics.item1": "Water, soils & biodiversity",
+  "topics.item2": "Climate change",
+  "topics.item3": "Safe labor practices",
+  "topics.item4": "Environmental & social management",
+  "topics.item5": "Responsible trade",
+  "topics.item6": "ESG & impact reporting",
 
-  "about.title": "About us",
-  "about.text": "We are a multidisciplinary team bridging sustainability, finance, and technology to help companies and investors transform agriculture and supply chains toward net-positive performance.",
+  "services.title": "Key services",
+  "services.subtitle": "Designed for producers, agro-exporters, DFIs, funds, banks, importers and retailers seeking ESG rigor with financial and operational focus.",
+  "services.card1.title": "ESG • Due diligence • ESMS",
+  "services.card1.text": "ESG assessments, due diligence and design of Environmental & Social Management Systems (ESMS) aligned with IFC Performance Standards.\n\nWe help prepare borrowers and companies to access responsible finance.",
+  "services.card2.title": "Sustainable finance",
+  "services.card2.text": "Structuring of frameworks, KPIs and impact models for bonds, loans and sustainable taxonomies.\n\nWe connect ESG performance with financial metrics and investment criteria.",
+  "services.card3.title": "Monitoring • Reporting • Data",
+  "services.card3.text": "Implementation of sustainability measurement and verification processes combining satellite monitoring, on-site verification and data dashboards.\n\nWe support annual reports and investor disclosures.\n\nWe develop information systems and web dashboards that integrate operational, environmental and financial data, enabling KPI tracking and preparation of ESG & impact reports.",
+
+  "approach.title": "Approach",
+  "approach.subtitle": "Pragmatic, evidence-based and geared to bankable outcomes.",
+  "approach.step1": "Diagnostics",
+  "approach.step1.text": "Assessment of ESG gaps, materiality, and critical factors for decision-making.",
+  "approach.step2": "Design",
+  "approach.step2.text": "Definition of KPIs, frameworks and measurement models. Strategy and tool design with achievable, traceable targets.",
+  "approach.step3": "Implementation",
+  "approach.step3.text": "Technical and operational implementation: field validation, decision dashboards, processes and systems.",
+  "approach.step4": "Measurement & reporting",
+  "approach.step4.text": "Monitoring, verification and ESG/impact reporting based on evidence and continuous improvement.",
+
+  "about.text": "Founded by Diego Brenes, with experience leading ESG and sustainability across agrifood and finance. We combine strategic vision, operational experience and technology to deliver measurable outcomes.",
+  "about.bul1": "• Alignment with IFC Performance Standards, SASB/ISSB, CSRD.",
+  "about.bul2": "• Integration of operational, environmental, satellite and financial data.",
+  "about.bul3": "• LatAm focus with global reach.",
+  "about.card.title": "Credentials & focus",
+  "about.card1": "ESG risk assessment & management",
+  "about.card2": "Sustainable finance",
+  "about.card3": "Agro & supply chain",
+  "about.card4": "Data • GIS • Remote sensing",
+  "about.card.note": "Available for projects in English and Spanish.",
 
   "contact.title": "Let’s talk",
-  "contact.subtitle": "Tell us briefly about your organization and objectives. We’ll respond within 1–2 business days.",
-  "contact.direct": "If you prefer, write to us directly at:",
-  "contact.general": "General",
+  "contact.subtitle": "Tell us briefly about your organization and objectives. We respond within 1–2 business days.",
+  "contact.direct": "If you prefer, you can write to us directly at:",
+  "contact.general": "General:",
   "contact.form_note": "The form below is optional and can help structure your inquiry if needed.",
 
   "form.name_label": "Name",
+  "form.name_placeholder": "Full name",
   "form.email_label": "Email",
+  "form.email_placeholder": "name@company.com",
+  "form.org_label": "Organization",
+  "form.org_placeholder": "Company / institution",
+  "form.topic_label": "Primary interest",
+  "form.topic1": "ESG / Due diligence",
+  "form.topic2": "Sustainable finance",
+  "form.topic3": "Data, dashboards & GIS",
+  "form.topic4": "Other",
   "form.message_label": "Message",
+  "form.message_placeholder": "Objectives, timelines and how we can help (max. 5000 characters)",
+  "form.consent": "By submitting, you agree to be contacted by SustTech™.",
   "form.submit": "Send",
-  "form.email_placeholder": "Your email",
-  "form.message_placeholder": "Your message",
 
-  "msg.success": "Thank you! 🎉 We’ve received your message and will respond within 1–2 business days.",
-  "msg.success_alt": "If you prefer, you can also write to us at contact@susttech.com.",
-  "msg.error": "Sorry — there was a problem sending your message. Please try again or email us directly.",
-
-  "footer.rights": "All rights reserved.",
-  "footer.madeby": "Made with integrity and purpose."
+  "msg.success_title": "Thank you! 🎉",
+  "msg.success": "We’ve received your message and will respond within 1–2 business days.",
+  "msg.success_alt": "If you prefer, you can also write to contact@susttech.com.",
+  "msg.back_top": "Back to top"
 }
+
+  

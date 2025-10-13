@@ -32,78 +32,64 @@
   <!-- Skip link -->
   <a href="#main" class="sr-only focus:not-sr-only fixed top-2 left-2 z-[1000] rounded bg-white px-3 py-2 text-sm shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500">Skip to content</a>
 
-  <!-- Header (i18n-ready, no PHP required) -->
-<header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
-  <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <!-- Logo -->
-      <svg class="h-12 w-12" role="img" focusable="false" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="SustTech hexagon network leaf">
-        <polygon points="32,6 52,18 52,46 32,58 12,46 12,18" fill="none" stroke="#0B3D3A" stroke-width="3"/>
-        <circle cx="32" cy="6" r="3" fill="#0891B2"/>
-        <circle cx="52" cy="18" r="3" fill="#0891B2"/>
-        <circle cx="52" cy="46" r="3" fill="#0891B2"/>
-        <circle cx="32" cy="58" r="3" fill="#0891B2"/>
-        <circle cx="12" cy="46" r="3" fill="#0891B2"/>
-        <circle cx="12" cy="18" r="3" fill="#0891B2"/>
-        <path d="M22 36c8-16 20-16 20-16-3 10-8 20-20 20" fill="none" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-      <div class="leading-tight">
-        <div class="text-5xl font-bold tracking-tight" style="color:#0B3D3A;">
-          SustTech<span class="align-top text-sm ml-1">™</span>
-        </div>
-        <div class="text-xs text-slate-500 -mt-0.5" data-i18n="tagline">
-          ESG & Sustainable Finance Advisory
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <!-- Logo -->
+        <svg class="h-12 w-12" role="img" focusable="false" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="SustTech hexagon network leaf">
+          <polygon points="32,6 52,18 52,46 32,58 12,46 12,18" fill="none" stroke="#0B3D3A" stroke-width="3"/>
+          <circle cx="32" cy="6" r="3" fill="#0891B2"/>
+          <circle cx="52" cy="18" r="3" fill="#0891B2"/>
+          <circle cx="52" cy="46" r="3" fill="#0891B2"/>
+          <circle cx="32" cy="58" r="3" fill="#0891B2"/>
+          <circle cx="12" cy="46" r="3" fill="#0891B2"/>
+          <circle cx="12" cy="18" r="3" fill="#0891B2"/>
+          <path d="M22 36c8-16 20-16 20-16-3 10-8 20-20 20" fill="none" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <div class="leading-tight">
+          <div class="text-5xl font-bold tracking-tight" style="color:#0B3D3A;">
+            SustTech<span class="align-top text-sm ml-1">™</span>
+          </div>
+          <div class="text-xs text-slate-500 -mt-0.5" data-i18n="tagline">
+            ESG & Sustainable Finance Advisory
+          </div>
         </div>
       </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm">
+        <a href="#services" class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2" data-i18n="nav.services">Services</a>
+        <a href="#approach" class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2" data-i18n="nav.approach">Approach</a>
+        <a href="#about"    class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2" data-i18n="nav.about">About us</a>
+        <a href="#contact"  class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2" data-i18n="nav.contact">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="hidden sm:inline-block rounded-xl px-4 py-2 bg-slate-900 text-white hover:bg-slate-800 transition focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2" data-i18n="cta.book">Book a call</a>
+
+        <!-- Language toggle -->
+        <button id="lang-toggle" class="rounded-md border border-slate-300 px-3 py-1 text-sm hover:bg-slate-100 transition" aria-label="Change language">ES</button>
+      </div>
     </div>
-
-    <nav class="hidden md:flex items-center gap-8 text-sm">
-      <a href="#services"
-         class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2"
-         data-i18n="nav.services">Services</a>
-      <a href="#approach"
-         class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2"
-         data-i18n="nav.approach">Approach</a>
-      <a href="#about"
-         class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2"
-         data-i18n="nav.about">About us</a>
-      <a href="#contact"
-         class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2"
-         data-i18n="nav.contact">Contact</a>
-    </nav>
-
-    <div class="flex items-center gap-3">
-      <!-- Call-to-action -->
-      <a href="#contact"
-         class="hidden sm:inline-block rounded-xl px-4 py-2 bg-slate-900 text-white hover:bg-slate-800 transition focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
-         data-i18n="cta.book">Book a call</a>
-
-      <!-- Language toggle -->
-      <button id="lang-toggle"
-              class="rounded-md border border-slate-300 px-3 py-1 text-sm hover:bg-slate-100 transition"
-              aria-label="Change language">ES</button>
-    </div>
-  </div>
-</header>
-
+  </header>
 
   <main id="main">
     <!-- Hero -->
     <section class="relative overflow-hidden">
       <div class="mx-auto max-w-7xl px-6 pt-12 pb-8 md:pt-20 md:pb-14 grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <h1 class="text-4xl md:text-6xl font-semibold leading-tight tracking-tight">
+          <h1 class="text-4xl md:text-6xl font-semibold leading-tight tracking-tight" data-i18n="hero.title">
             We accelerate your organization’s <span class="bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-transparent">sustainable</span> transition
           </h1>
-          <p class="mt-5 text-lg text-slate-600 max-w-xl">
+          <p class="mt-5 text-lg text-slate-600 max-w-xl" data-i18n="hero.subtitle">
             Strategic and technical consulting in ESG, sustainable finance, and impact measurement. We combine financial rigor with applied data science and technology to enable clear,
             <span class="font-medium text-slate-700">bankable</span> decisions across sustainability, profitability, and evidence.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#contact" class="rounded-xl px-5 py-3 bg-slate-900 text-white hover:bg-slate-800 transition focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2">Let’s talk</a>
-            <a href="#services" class="rounded-xl px-5 py-3 border border-slate-300 hover:border-slate-400 focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2">See services</a>
+            <a href="#contact" class="rounded-xl px-5 py-3 bg-slate-900 text-white hover:bg-slate-800 transition focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2" data-i18n="cta.talk">Let’s talk</a>
+            <a href="#services" class="rounded-xl px-5 py-3 border border-slate-300 hover:border-slate-400 focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2" data-i18n="cta.view_services">See services</a>
           </div>
-          <div class="mt-6 pt-4 border-t border-slate-200 text-sm text-slate-500 italic tracking-wide">
+          <div class="mt-6 pt-4 border-t border-slate-200 text-sm text-slate-500 italic tracking-wide" data-i18n="hero.availability">
             Available for <span class="text-slate-700 font-medium not-italic">sustainability projects and advisory</span> 2025–2026.
           </div>
         </div>
@@ -158,20 +144,20 @@
     <!-- Sectors & Topics -->
     <section class="py-10 border-y border-slate-200 bg-slate-50">
       <div class="mx-auto max-w-7xl px-6">
-        <p class="text-xs uppercase tracking-wider text-slate-500 mb-4 text-center">Sectors & thematic areas</p>
+        <p class="text-xs uppercase tracking-wider text-slate-500 mb-4 text-center" data-i18n="sectors.title">Sectors & thematic areas</p>
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-slate-700 text-sm text-center">
           <!-- Sectors -->
-          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100">Companies & cooperatives (SMEs to large groups)</div>
-          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100">Financial institutions</div>
-          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100">Impact investors</div>
-          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100">Agroindustry & value chains</div>
+          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100" data-i18n="sectors.item1">Companies & cooperatives (SMEs to large groups)</div>
+          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100" data-i18n="sectors.item2">Financial institutions</div>
+          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100" data-i18n="sectors.item3">Impact investors</div>
+          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100" data-i18n="sectors.item4">Agroindustry & value chains</div>
           <!-- Topics -->
-          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100">Water, soils & biodiversity</div>
-          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100">Climate change</div>
-          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100">Safe labor practices</div>
-          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100">Environmental & social management</div>
-          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100">Responsible trade</div>
-          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100">ESG & impact reporting</div>
+          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100" data-i18n="topics.item1">Water, soils & biodiversity</div>
+          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100" data-i18n="topics.item2">Climate change</div>
+          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100" data-i18n="topics.item3">Safe labor practices</div>
+          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100" data-i18n="topics.item4">Environmental & social management</div>
+          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100" data-i18n="topics.item5">Responsible trade</div>
+          <div class="rounded-lg bg-white py-2 px-3 border border-slate-100" data-i18n="topics.item6">ESG & impact reporting</div>
         </div>
       </div>
     </section>
@@ -179,17 +165,17 @@
     <!-- Services -->
     <section id="services" class="py-16 md:py-24 scroll-mt-24">
       <div class="mx-auto max-w-7xl px-6">
-        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Key services</h2>
-        <p class="mt-3 text-slate-600 max-w-2xl">Designed for producers, agro-exporters, DFIs, funds, banks, importers and retailers seeking ESG rigor with financial and operational focus.</p>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight" data-i18n="services.title">Key services</h2>
+        <p class="mt-3 text-slate-600 max-w-2xl" data-i18n="services.subtitle">Designed for producers, agro-exporters, DFIs, funds, banks, importers and retailers seeking ESG rigor with financial and operational focus.</p>
 
         <div class="mt-10 grid md:grid-cols-3 gap-6">
           <!-- 1 -->
           <div class="rounded-3xl border border-slate-200 p-6 bg-white hover:shadow-sm transition">
             <div class="flex items-center gap-2">
               <i data-lucide="shield-check" class="w-5 h-5 text-slate-600" aria-hidden="true"></i>
-              <h3 class="text-lg font-semibold">ESG • Due diligence • ESMS</h3>
+              <h3 class="text-lg font-semibold" data-i18n="services.card1.title">ESG • Due diligence • ESMS</h3>
             </div>
-            <p class="mt-2 text-slate-600 text-sm">
+            <p class="mt-2 text-slate-600 text-sm" data-i18n="services.card1.text">
               ESG assessments, due diligence and design of Environmental & Social Management Systems (ESMS) aligned with IFC Performance Standards.
               <br><br>We help prepare borrowers and companies to access responsible finance.
             </p>
@@ -198,9 +184,9 @@
           <div class="rounded-3xl border border-slate-200 p-6 bg-white hover:shadow-sm transition">
             <div class="flex items-center gap-2">
               <i data-lucide="banknote" class="w-5 h-5 text-slate-600" aria-hidden="true"></i>
-              <h3 class="text-lg font-semibold">Sustainable finance</h3>
+              <h3 class="text-lg font-semibold" data-i18n="services.card2.title">Sustainable finance</h3>
             </div>
-            <p class="mt-2 text-slate-600 text-sm">
+            <p class="mt-2 text-slate-600 text-sm" data-i18n="services.card2.text">
               Structuring of frameworks, KPIs and impact models for bonds, loans and sustainable taxonomies.
               <br><br>We connect ESG performance with financial metrics and investment criteria.
             </p>
@@ -209,9 +195,9 @@
           <div class="rounded-3xl border border-slate-200 p-6 bg-white hover:shadow-sm transition">
             <div class="flex items-center gap-2">
               <i data-lucide="bar-chart-3" class="w-5 h-5 text-slate-600" aria-hidden="true"></i>
-              <h3 class="text-lg font-semibold">Monitoring • Reporting • Data</h3>
+              <h3 class="text-lg font-semibold" data-i18n="services.card3.title">Monitoring • Reporting • Data</h3>
             </div>
-            <p class="mt-2 text-slate-600 text-sm">
+            <p class="mt-2 text-slate-600 text-sm" data-i18n="services.card3.text">
               Implementation of sustainability measurement and verification processes combining satellite monitoring, on-site verification and data dashboards.
               <br><br>We support annual reports and investor disclosures.
               <br><br>We develop information systems and web dashboards that integrate operational, environmental and financial data, enabling KPI tracking and preparation of ESG & impact reports.
@@ -226,8 +212,8 @@
       <div class="mx-auto max-w-7xl px-6">
         <div class="md:grid md:grid-cols-3 md:gap-8 items-start">
           <div class="md:col-span-1">
-            <h2 class="text-3xl font-semibold tracking-tight">Approach</h2>
-            <p class="mt-3 text-slate-600">Pragmatic, evidence-based and geared to bankable outcomes.</p>
+            <h2 class="text-3xl font-semibold tracking-tight" data-i18n="approach.title">Approach</h2>
+            <p class="mt-3 text-slate-600" data-i18n="approach.subtitle">Pragmatic, evidence-based and geared to bankable outcomes.</p>
           </div>
           <div class="mt-8 md:mt-0 md:col-span-2">
             <div class="grid md:grid-cols-2 gap-6">
@@ -236,36 +222,36 @@
                 <div class="absolute -top-px left-0 right-0 h-1.5 rounded-t-2xl" style="background:var(--pine); opacity:.9;"></div>
                 <div class="flex items-center gap-3">
                   <div class="h-8 w-8 rounded-full grid place-items-center text-sm font-semibold text-white" style="background:var(--pine);">1</div>
-                  <h3 class="text-base font-semibold">Diagnostics</h3>
+                  <h3 class="text-base font-semibold" data-i18n="approach.step1">Diagnostics</h3>
                 </div>
-                <p class="mt-2 text-slate-600 text-sm">Assessment of ESG gaps, materiality, and critical factors for decision-making.</p>
+                <p class="mt-2 text-slate-600 text-sm" data-i18n="approach.step1.text">Assessment of ESG gaps, materiality, and critical factors for decision-making.</p>
               </div>
               <!-- 2 -->
               <div class="group relative rounded-2xl border border-slate-200 bg-white p-5 md:p-6 hover:shadow-sm transition">
                 <div class="absolute -top-px left-0 right-0 h-1.5 rounded-t-2xl" style="background:var(--pine); opacity:.9;"></div>
                 <div class="flex items-center gap-3">
                   <div class="h-8 w-8 rounded-full grid place-items-center text-sm font-semibold text-white" style="background:var(--pine);">2</div>
-                  <h3 class="text-base font-semibold">Design</h3>
+                  <h3 class="text-base font-semibold" data-i18n="approach.step2">Design</h3>
                 </div>
-                <p class="mt-2 text-slate-600 text-sm">Definition of KPIs, frameworks and measurement models. Strategy and tool design with achievable, traceable targets.</p>
+                <p class="mt-2 text-slate-600 text-sm" data-i18n="approach.step2.text">Definition of KPIs, frameworks and measurement models. Strategy and tool design with achievable, traceable targets.</p>
               </div>
               <!-- 3 -->
               <div class="group relative rounded-2xl border border-slate-200 bg-white p-5 md:p-6 hover:shadow-sm transition">
                 <div class="absolute -top-px left-0 right-0 h-1.5 rounded-t-2xl" style="background:var(--pine); opacity:.9;"></div>
                 <div class="flex items-center gap-3">
                   <div class="h-8 w-8 rounded-full grid place-items-center text-sm font-semibold text-white" style="background:var(--pine);">3</div>
-                  <h3 class="text-base font-semibold">Implementation</h3>
+                  <h3 class="text-base font-semibold" data-i18n="approach.step3">Implementation</h3>
                 </div>
-                <p class="mt-2 text-slate-600 text-sm">Technical and operational implementation: field validation, decision dashboards, processes and systems.</p>
+                <p class="mt-2 text-slate-600 text-sm" data-i18n="approach.step3.text">Technical and operational implementation: field validation, decision dashboards, processes and systems.</p>
               </div>
               <!-- 4 -->
               <div class="group relative rounded-2xl border border-slate-200 bg-white p-5 md:p-6 hover:shadow-sm transition">
                 <div class="absolute -top-px left-0 right-0 h-1.5 rounded-t-2xl" style="background:var(--pine); opacity:.9;"></div>
                 <div class="flex items-center gap-3">
                   <div class="h-8 w-8 rounded-full grid place-items-center text-sm font-semibold text-white" style="background:var(--pine);">4</div>
-                  <h3 class="text-base font-semibold">Measurement & reporting</h3>
+                  <h3 class="text-base font-semibold" data-i18n="approach.step4">Measurement & reporting</h3>
                 </div>
-                <p class="mt-2 text-slate-600 text-sm">Monitoring, verification and ESG/impact reporting based on evidence and continuous improvement.</p>
+                <p class="mt-2 text-slate-600 text-sm" data-i18n="approach.step4.text">Monitoring, verification and ESG/impact reporting based on evidence and continuous improvement.</p>
               </div>
             </div>
           </div>
@@ -278,24 +264,24 @@
       <div class="mx-auto max-w-7xl px-6 grid md:grid-cols-2 gap-10 items-center">
         <div>
           <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">SustTech<span class="align-top text-xs ml-1">™</span></h2>
-          <p class="mt-4 text-slate-600">
+          <p class="mt-4 text-slate-600" data-i18n="about.text">
             Founded by Diego Brenes, with experience leading ESG and sustainability across agrifood and finance. We combine strategic vision, operational experience and technology to deliver measurable outcomes.
           </p>
           <ul class="mt-6 space-y-2 text-slate-700 text-sm">
-            <li>• Alignment with IFC Performance Standards, SASB/ISSB, CSRD.</li>
-            <li>• Integration of operational, environmental, satellite and financial data.</li>
-            <li>• LatAm focus with global reach.</li>
+            <li data-i18n="about.bul1">• Alignment with IFC Performance Standards, SASB/ISSB, CSRD.</li>
+            <li data-i18n="about.bul2">• Integration of operational, environmental, satellite and financial data.</li>
+            <li data-i18n="about.bul3">• LatAm focus with global reach.</li>
           </ul>
         </div>
         <div class="rounded-3xl border border-slate-200 p-6 bg-white">
-          <h3 class="text-lg font-semibold">Credentials &amp; focus</h3>
+          <h3 class="text-lg font-semibold" data-i18n="about.card.title">Credentials &amp; focus</h3>
           <div class="mt-4 grid grid-cols-2 gap-4 text-sm">
-            <div class="rounded-2xl bg-slate-50 p-4">ESG risk assessment & management</div>
-            <div class="rounded-2xl bg-slate-50 p-4">Sustainable finance</div>
-            <div class="rounded-2xl bg-slate-50 p-4">Agro &amp; supply chain</div>
-            <div class="rounded-2xl bg-slate-50 p-4">Data • GIS • Remote sensing</div>
+            <div class="rounded-2xl bg-slate-50 p-4" data-i18n="about.card1">ESG risk assessment & management</div>
+            <div class="rounded-2xl bg-slate-50 p-4" data-i18n="about.card2">Sustainable finance</div>
+            <div class="rounded-2xl bg-slate-50 p-4" data-i18n="about.card3">Agro &amp; supply chain</div>
+            <div class="rounded-2xl bg-slate-50 p-4" data-i18n="about.card4">Data • GIS • Remote sensing</div>
           </div>
-          <p class="mt-4 text-xs text-slate-500">Available for projects in English and Spanish.</p>
+          <p class="mt-4 text-xs text-slate-500" data-i18n="about.card.note">Available for projects in English and Spanish.</p>
         </div>
       </div>
     </section>
@@ -304,21 +290,21 @@
     <section id="contact" class="py-16 bg-gradient-to-b from-white to-slate-50 scroll-mt-24">
       <div class="mx-auto max-w-3xl px-6">
         <div class="rounded-3xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
-          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Let’s talk</h2>
-          <p class="mt-2 text-slate-600">Tell us briefly about your organization and objectives. We respond within 1–2 business days.</p>
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight" data-i18n="contact.title">Let’s talk</h2>
+          <p class="mt-2 text-slate-600" data-i18n="contact.subtitle">Tell us briefly about your organization and objectives. We respond within 1–2 business days.</p>
 
           <!-- Emails -->
           <div class="mt-6 rounded-xl bg-slate-50 border border-slate-100 p-4 md:p-5">
-            <p class="text-sm text-slate-700 leading-relaxed">If you prefer, you can write to us directly at:</p>
+            <p class="text-sm text-slate-700 leading-relaxed" data-i18n="contact.direct">If you prefer, you can write to us directly at:</p>
             <div class="mt-2 space-y-1 text-sm">
-              <p><span class="text-slate-500">General:</span>
+              <p><span class="text-slate-500" data-i18n="contact.general">General:</span>
                 <a href="mailto:contact@susttech.com" class="ml-2 text-sky-700 hover:text-sky-600 font-medium underline underline-offset-2 decoration-sky-400">contact@susttech.com</a>
               </p>
               <p><span class="text-slate-500">Diego Brenes:</span>
                 <a href="mailto:diego@susttech.com" class="ml-2 text-sky-700 hover:text-sky-600 font-medium underline underline-offset-2 decoration-sky-400">diego@susttech.com</a>
               </p>
             </div>
-            <p class="mt-3 text-xs text-slate-500 italic">The form below is optional and can help structure your inquiry if needed.</p>
+            <p class="mt-3 text-xs text-slate-500 italic" data-i18n="contact.form_note">The form below is optional and can help structure your inquiry if needed.</p>
           </div>
 
           <!-- Form -->
@@ -327,47 +313,51 @@
 
             <div class="grid md:grid-cols-2 gap-4">
               <div>
-                <label class="text-sm text-slate-700" for="name">Name</label>
+                <label class="text-sm text-slate-700" for="name" data-i18n="form.name_label">Name</label>
                 <input id="name" name="name" required autocomplete="name"
                        class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                       data-i18n-attr="placeholder:form.name_placeholder"
                        placeholder="Full name">
               </div>
               <div>
-                <label class="text-sm text-slate-700" for="email">Email</label>
+                <label class="text-sm text-slate-700" for="email" data-i18n="form.email_label">Email</label>
                 <input id="email" type="email" name="email" required autocomplete="email"
                        class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                       data-i18n-attr="placeholder:form.email_placeholder"
                        placeholder="name@company.com">
               </div>
             </div>
 
             <div>
-              <label class="text-sm text-slate-700" for="org">Organization</label>
+              <label class="text-sm text-slate-700" for="org" data-i18n="form.org_label">Organization</label>
               <input id="org" name="org" autocomplete="organization"
                      class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                     data-i18n-attr="placeholder:form.org_placeholder"
                      placeholder="Company / institution">
             </div>
 
             <div>
-              <label class="text-sm text-slate-700" for="topic">Primary interest</label>
+              <label class="text-sm text-slate-700" for="topic" data-i18n="form.topic_label">Primary interest</label>
               <select id="topic" name="topic" autocomplete="off"
                       class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-200">
-                <option>ESG / Due diligence</option>
-                <option>Sustainable finance</option>
-                <option>Data, dashboards & GIS</option>
-                <option>Other</option>
+                <option data-i18n="form.topic1">ESG / Due diligence</option>
+                <option data-i18n="form.topic2">Sustainable finance</option>
+                <option data-i18n="form.topic3">Data, dashboards & GIS</option>
+                <option data-i18n="form.topic4">Other</option>
               </select>
             </div>
 
             <div>
-              <label class="text-sm text-slate-700" for="message">Message</label>
+              <label class="text-sm text-slate-700" for="message" data-i18n="form.message_label">Message</label>
               <textarea id="message" name="message" rows="4" required autocomplete="off"
                         class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                        data-i18n-attr="placeholder:form.message_placeholder"
                         placeholder="Objectives, timelines and how we can help (max. 5000 characters)"></textarea>
             </div>
 
             <div class="flex items-center justify-between gap-3">
-              <div class="text-xs text-slate-500">By submitting, you agree to be contacted by SustTech<span class="align-top text-[10px] ml-0.5">™</span>.</div>
-              <button type="submit" class="rounded-xl px-5 py-3 bg-slate-900 text-white hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2">
+              <div class="text-xs text-slate-500" data-i18n="form.consent">By submitting, you agree to be contacted by SustTech<span class="align-top text-[10px] ml-0.5">™</span>.</div>
+              <button type="submit" class="rounded-xl px-5 py-3 bg-slate-900 text-white hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2" data-i18n="form.submit">
                 Send
               </button>
             </div>
@@ -377,13 +367,11 @@
 
           <!-- Success message (hidden until success) -->
           <div id="formSuccess" class="hidden mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-6" role="status" aria-live="polite" tabindex="-1">
-            <h3 class="text-lg font-semibold text-emerald-900">Thank you! 🎉</h3>
-            <p class="mt-2 text-slate-700">We’ve received your message and will respond within 1–2 business days.</p>
-            <p class="mt-2 text-slate-700">If you prefer, you can also write to
-              <a class="text-sky-700 underline underline-offset-2" href="mailto:contact@susttech.com">contact@susttech.com</a>.
-            </p>
+            <h3 class="text-lg font-semibold text-emerald-900" data-i18n="msg.success_title">Thank you! 🎉</h3>
+            <p class="mt-2 text-slate-700" data-i18n="msg.success">We’ve received your message and will respond within 1–2 business days.</p>
+            <p class="mt-2 text-slate-700" data-i18n="msg.success_alt">If you prefer, you can also write to <a class="text-sky-700 underline underline-offset-2" href="mailto:contact@susttech.com">contact@susttech.com</a>.</p>
             <div class="mt-4">
-              <a href="#main" class="inline-flex items-center rounded-xl px-4 py-2 border border-emerald-300 text-emerald-900 hover:bg-emerald-100 focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2">Back to top</a>
+              <a href="#main" class="inline-flex items-center rounded-xl px-4 py-2 border border-emerald-300 text-emerald-900 hover:bg-emerald-100 focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2" data-i18n="msg.back_top">Back to top</a>
             </div>
           </div>
 
