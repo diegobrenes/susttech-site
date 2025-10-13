@@ -1,0 +1,48 @@
+{
+  "meta.title": "SustTech | ESG & Sustainable Finance Advisory",
+  "meta.description": "We accelerate your organization’s sustainable transition. Strategic and technical consulting in ESG, sustainable finance, and impact measurement.",
+
+  "tagline": "ESG & Sustainable Finance Advisory",
+
+  "nav.services": "Services",
+  "nav.approach": "Approach",
+  "nav.about": "About us",
+  "nav.contact": "Contact",
+
+  "cta.book": "Book a call",
+
+  "hero.title": "We accelerate your organization’s sustainable transition",
+  "hero.subtitle": "Strategic and technical consulting in ESG, sustainable finance, and impact measurement.",
+  "hero.button": "Discover our services",
+
+  "services.title": "Our services",
+  "services.item1": "Alignment with IFC Performance Standards, SASB/ISSB, CSRD",
+  "services.item2": "Integration of operational, environmental, satellite and financial data",
+  "services.item3": "LatAm-focused with a global reach",
+
+  "approach.title": "Our approach",
+  "approach.subtitle": "We combine financial rigor with data science to enable clear, bankable decisions.",
+
+  "about.title": "About us",
+  "about.text": "We are a multidisciplinary team bridging sustainability, finance, and technology to help companies and investors transform agriculture and supply chains toward net-positive performance.",
+
+  "contact.title": "Let’s talk",
+  "contact.subtitle": "Tell us briefly about your organization and objectives. We’ll respond within 1–2 business days.",
+  "contact.direct": "If you prefer, write to us directly at:",
+  "contact.general": "General",
+  "contact.form_note": "The form below is optional and can help structure your inquiry if needed.",
+
+  "form.name_label": "Name",
+  "form.email_label": "Email",
+  "form.message_label": "Message",
+  "form.submit": "Send",
+  "form.email_placeholder": "Your email",
+  "form.message_placeholder": "Your message",
+
+  "msg.success": "Thank you! 🎉 We’ve received your message and will respond within 1–2 business days.",
+  "msg.success_alt": "If you prefer, you can also write to us at contact@susttech.com.",
+  "msg.error": "Sorry — there was a problem sending your message. Please try again or email us directly.",
+
+  "footer.rights": "All rights reserved.",
+  "footer.madeby": "Made with integrity and purpose."
+}

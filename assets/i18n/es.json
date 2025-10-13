@@ -1,0 +1,48 @@
+{
+  "meta.title": "SustTech | Consultoría en ESG y Finanzas Sostenibles",
+  "meta.description": "Aceleramos la transición sostenible de su organización. Consultoría estratégica y técnica en ESG, finanzas sostenibles y medición de impacto.",
+
+  "tagline": "Consultoría en ESG y Finanzas Sostenibles",
+
+  "nav.services": "Servicios",
+  "nav.approach": "Enfoque",
+  "nav.about": "Sobre nosotros",
+  "nav.contact": "Contacto",
+
+  "cta.book": "Agenda una llamada",
+
+  "hero.title": "Aceleramos la transición sostenible de su organización",
+  "hero.subtitle": "Consultoría estratégica y técnica en ESG, finanzas sostenibles y medición de impacto.",
+  "hero.button": "Descubre nuestros servicios",
+
+  "services.title": "Nuestros servicios",
+  "services.item1": "Alineación con Estándares IFC, SASB/ISSB, CSRD",
+  "services.item2": "Integración de datos operativos, ambientales, satelitales y financieros",
+  "services.item3": "Enfoque en LatAm con alcance global",
+
+  "approach.title": "Nuestro enfoque",
+  "approach.subtitle": "Combinamos rigor financiero con ciencia de datos para habilitar decisiones claras y bancables.",
+
+  "about.title": "Sobre nosotros",
+  "about.text": "Somos un equipo multidisciplinario que conecta sostenibilidad, finanzas y tecnología para ayudar a empresas e inversionistas a transformar la agricultura y las cadenas de suministro hacia un desempeño neto positivo.",
+
+  "contact.title": "Conversemos",
+  "contact.subtitle": "Cuéntanos brevemente sobre tu organización y objetivos. Responderemos en 1–2 días hábiles.",
+  "contact.direct": "Si prefieres, escríbenos directamente a:",
+  "contact.general": "General",
+  "contact.form_note": "El formulario es opcional y puede ayudarte a estructurar tu consulta si lo deseas.",
+
+  "form.name_label": "Nombre",
+  "form.email_label": "Correo",
+  "form.message_label": "Mensaje",
+  "form.submit": "Enviar",
+  "form.email_placeholder": "Tu correo",
+  "form.message_placeholder": "Tu mensaje",
+
+  "msg.success": "¡Gracias! 🎉 Hemos recibido tu mensaje y responderemos en 1–2 días hábiles.",
+  "msg.success_alt": "Si prefieres, también puedes escribirnos a contact@susttech.com.",
+  "msg.error": "Perdón — hubo un problema al enviar el mensaje. Intenta de nuevo o escríbenos directo.",
+
+  "footer.rights": "Todos los derechos reservados.",
+  "footer.madeby": "Hecho con integridad y propósito."
+}
