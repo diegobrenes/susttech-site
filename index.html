@@ -437,10 +437,9 @@
       var btn = document.getElementById('lang-toggle');
       if (!btn) return;
 
-      function onES() {
-        return /^\/es(\/|$)/.test(location.pathname);
-      }
+      function onES() { return /^\/es(\/|$)/.test(location.pathname); }
 
+      // Button label
       function setLabel() {
         btn.textContent = onES() ? 'EN' : 'ES';
         btn.setAttribute('aria-label', onES() ? 'Switch to English' : 'Cambiar a Español');
@@ -448,12 +447,14 @@
       setLabel();
 
       btn.addEventListener('click', function () {
-        var hash = location.hash || '';
+        // Always go to the top of the target language page (no hash)
         var target = onES() ? '/' : '/es/';
-        location.href = target + hash; // preserve #section anchor
+        // Use replace so we don't add an extra history entry
+        location.replace(target);
       });
     })();
-  </script>
+</script>
+
 
   
   <!-- 3) Force language for this page -->  
