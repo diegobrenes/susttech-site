@@ -1,6 +1,5 @@
 <!doctype html>
 <!-- susttech.com página web en español (/es/) -->
-
 <html class="scroll-smooth" lang="es">
 <head>
   <meta charset="utf-8">
@@ -11,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- hreflang / canonical -->
   <link rel="alternate" href="https://www.susttech.com/" hreflang="en">
   <link rel="alternate" href="https://www.susttech.com/es/" hreflang="es">
@@ -21,81 +21,132 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     html { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji"; }
+    /* Respeto por usuarios con movimiento reducido */
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
       .backdrop-blur { backdrop-filter: none !important; }
     }
+    /* Equilibrar longitud de línea del héroe y evitar líneas larguísimas en desktop */
+    @media (min-width: 1024px) { .hero-title { max-width: 24ch; } }
+    /* Evitar scroll horizontal accidental en móviles */
+    body { overflow-x: hidden; }
   </style>
 </head>
 
 <body class="min-h-screen bg-white text-slate-900">
-  <!-- Skip link -->
+  <!-- Enlace para saltar al contenido -->
   <a href="#main" class="sr-only focus:not-sr-only fixed top-2 left-2 z-[1000] rounded bg-white px-3 py-2 text-sm shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500">Saltar al contenido</a>
 
-  <!-- Header -->
-  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+  <!-- Encabezado -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
-      <div class="flex items-center gap-2">
-        <!-- Logo -->
-        <svg class="h-12 w-12" role="img" focusable="false" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="SustTech hexágono red hoja">
-          <polygon points="32,6 52,18 52,46 32,58 12,46 12,18" fill="none" stroke="#0B3D3A" stroke-width="3"/>
-          <circle cx="32" cy="6" r="3" fill="#0891B2"/>
-          <circle cx="52" cy="18" r="3" fill="#0891B2"/>
-          <circle cx="52" cy="46" r="3" fill="#0891B2"/>
-          <circle cx="32" cy="58" r="3" fill="#0891B2"/>
-          <circle cx="12" cy="46" r="3" fill="#0891B2"/>
-          <circle cx="12" cy="18" r="3" fill="#0891B2"/>
-          <path d="M22 36c8-16 20-16 20-16-3 10-8 20-20 20" fill="none" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
-        </svg>
-        <div class="leading-tight">
-          <div class="text-5xl font-bold tracking-tight" style="color:#0B3D3A;">
-            SustTech<span class="align-top text-sm ml-1">™</span>
+      <!-- Marca -->
+      <div class="flex items-center gap-2 min-w-0">
+        <a href="#main" class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded-md" aria-label="Ir al inicio del contenido">
+          <svg class="h-10 w-10 sm:h-12 sm:w-12 shrink-0" role="img" focusable="false" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="SustTech hoja en red hexagonal">
+            <polygon points="32,6 52,18 52,46 32,58 12,46 12,18" fill="none" stroke="#0B3D3A" stroke-width="3"/>
+            <circle cx="32" cy="6" r="3" fill="#0891B2"/>
+            <circle cx="52" cy="18" r="3" fill="#0891B2"/>
+            <circle cx="52" cy="46" r="3" fill="#0891B2"/>
+            <circle cx="32" cy="58" r="3" fill="#0891B2"/>
+            <circle cx="12" cy="46" r="3" fill="#0891B2"/>
+            <circle cx="12" cy="18" r="3" fill="#0891B2"/>
+            <path d="M22 36c8-16 20-16 20-16-3 10-8 20-20 20" fill="none" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </a>
+        <div class="leading-tight min-w-0">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight truncate" style="color:#0B3D3A;">
+            SustTech<span class="align-top text-[10px] sm:text-xs ml-1">™</span>
           </div>
-          <div class="text-xs text-slate-500 -mt-0.5" data-i18n="tagline">
+          <div class="text-[10px] sm:text-xs text-slate-500 -mt-0.5 truncate" data-i18n="tagline">
             Consultoría en ESG y Finanzas Sostenibles
           </div>
         </div>
       </div>
 
-      <nav class="hidden md:flex items-center gap-8 text-sm">
+      <!-- Navegación escritorio -->
+      <nav class="hidden md:flex items-center gap-8 text-sm" aria-label="Navegación principal">
         <a href="#services" class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2" data-i18n="nav.services">Servicios</a>
         <a href="#approach" class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2" data-i18n="nav.approach">Enfoque</a>
         <a href="#about"    class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2" data-i18n="nav.about">Sobre nosotros</a>
         <a href="#contact"  class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2" data-i18n="nav.contact">Contacto</a>
       </nav>
 
-      <div class="flex items-center gap-3">
+      <!-- Acciones -->
+      <div class="flex items-center gap-2 sm:gap-3">
         <a href="#contact" class="hidden sm:inline-block rounded-xl px-4 py-2 bg-slate-900 text-white hover:bg-slate-800 transition focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2" data-i18n="cta.book">Agenda una llamada</a>
 
-        <!-- Language toggle -->
-        <button id="lang-toggle" class="rounded-md border border-slate-300 px-3 py-1 text-sm hover:bg-slate-100 transition" aria-label="Cambiar idioma">EN</button>
+        <!-- Alternar idioma (escritorio) -->
+        <button id="lang-toggle" class="hidden sm:inline-block shrink-0 whitespace-nowrap rounded-md border border-slate-300 px-2.5 py-1 text-xs sm:text-sm hover:bg-slate-100 transition" aria-label="Cambiar idioma">EN</button>
+
+        <!-- Hamburguesa móvil -->
+        <button id="menu-toggle"
+                class="md:hidden inline-flex items-center justify-center rounded-md p-2 border border-slate-300 hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-sky-500"
+                aria-label="Abrir menú"
+                aria-controls="mobile-menu"
+                aria-expanded="false">
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú móvil (overlay + panel) -->
+    <div id="mobile-menu"
+         class="md:hidden fixed inset-0 z-50 hidden"
+         aria-modal="true" role="dialog" aria-labelledby="mobileMenuTitle">
+      <!-- Fondo -->
+      <div id="mobile-overlay" class="absolute inset-0 bg-black/40"></div>
+
+      <!-- Panel -->
+      <div class="absolute right-0 top-0 h-full w-[86%] max-w-sm bg-white shadow-xl border-l border-slate-200 p-4 flex flex-col"
+           style="will-change: transform;">
+        <div class="flex items-center justify-between">
+          <h2 id="mobileMenuTitle" class="text-base font-semibold">Menú</h2>
+          <button id="menu-close" class="rounded-md p-2 border border-slate-300 hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-sky-500" aria-label="Cerrar menú">
+            <i data-lucide="x" class="h-5 w-5" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <nav class="mt-4" aria-label="Navegación móvil principal">
+          <ul class="space-y-1 text-base">
+            <li><a class="block rounded-lg px-3 py-2 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500" href="#services" data-i18n="nav.services">Servicios</a></li>
+            <li><a class="block rounded-lg px-3 py-2 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500" href="#approach" data-i18n="nav.approach">Enfoque</a></li>
+            <li><a class="block rounded-lg px-3 py-2 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500" href="#about" data-i18n="nav.about">Sobre nosotros</a></li>
+            <li><a class="block rounded-lg px-3 py-2 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500" href="#contact" data-i18n="nav.contact">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <div class="mt-4 border-t border-slate-200 pt-4 flex items-center gap-2">
+          <a href="#contact" class="rounded-lg px-4 py-2 bg-slate-900 text-white hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-sky-500" data-i18n="cta.book">Agenda una llamada</a>
+          <button id="lang-toggle-mobile" class="rounded-md border border-slate-300 px-2.5 py-1 text-sm hover:bg-slate-100" aria-label="Cambiar idioma">EN</button>
+        </div>
       </div>
     </div>
   </header>
 
   <main id="main">
-    <!-- Hero -->
+    <!-- Héroe -->
     <section class="relative overflow-hidden">
-      <div class="mx-auto max-w-7xl px-6 pt-12 pb-8 md:pt-20 md:pb-14 grid md:grid-cols-2 gap-10 items-center">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 pt-8 sm:pt-12 pb-6 sm:pb-8 grid md:grid-cols-2 gap-8 md:gap-10 items-center">
         <div>
-          <h1 class="text-4xl md:text-6xl font-semibold leading-tight tracking-tight" data-i18n="hero.title">
+          <h1 class="hero-title [text-wrap:balance] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight" data-i18n="hero.title">
             Aceleramos la transición <span class="bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-transparent">sostenible</span> de su organización
           </h1>
-          <p class="mt-5 text-lg text-slate-600 max-w-xl" data-i18n="hero.subtitle">
+          <p class="mt-4 text-base sm:text-lg text-slate-600 max-w-xl" data-i18n="hero.subtitle">
             Consultoría estratégica y técnica en ESG, finanzas sostenibles y medición de impacto. Combinamos rigor financiero con ciencia de datos y tecnología aplicada para habilitar decisiones claras y
             <span class="font-medium text-slate-700">viables</span> en sostenibilidad, rentabilidad y evidencia.
           </p>
-          <div class="mt-8 flex flex-wrap gap-3">
+          <div class="mt-6 flex flex-wrap gap-2.5 sm:gap-3">
             <a href="#contact" class="rounded-xl px-5 py-3 bg-slate-900 text-white hover:bg-slate-800 transition focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2" data-i18n="cta.talk">Hablemos</a>
             <a href="#services" class="rounded-xl px-5 py-3 border border-slate-300 hover:border-slate-400 focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2" data-i18n="cta.view_services">Ver servicios</a>
           </div>
-          <div class="mt-6 pt-4 border-t border-slate-200 text-sm text-slate-500 italic tracking-wide" data-i18n="hero.availability">
+          <div class="mt-5 pt-4 border-t border-slate-200 text-xs sm:text-sm text-slate-500 italic tracking-wide" data-i18n="hero.availability">
             Disponibles para <span class="text-slate-700 font-medium not-italic">proyectos y asesorías en sostenibilidad</span> 2025–2026.
           </div>
         </div>
 
-        <!-- Hero dashboard cards -->
-        <div class="relative">
+        <!-- Visual del héroe (oculto en móvil) -->
+        <div class="relative hidden md:block">
           <div class="w-full rounded-3xl bg-gradient-to-br from-emerald-100 via-sky-100 to-amber-100 p-1">
             <div class="h-full w-full rounded-2xl bg-white grid grid-cols-2">
               <div class="p-6 flex flex-col gap-3 border-r border-slate-100">
@@ -120,7 +171,7 @@
                   </div>
                   <div class="text-xs text-slate-500 mt-1">Promedio de tres años</div>
                 </div>
-                <!-- CapEx Verde -->
+                <!-- CapEx verde -->
                 <div class="rounded-2xl border border-slate-200 p-4">
                   <div class="text-xs uppercase tracking-wider text-slate-500">CapEx verde</div>
                   <div class="my-2 h-px bg-slate-100"></div>
@@ -132,7 +183,7 @@
                 <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-600">ESG • Due diligence</span>
                 <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-600">Taxonomías UE/IFC</span>
                 <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-600">Medición de impacto</span>
-                <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-600">Data • Satélite • GIS</span>
+                <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-600">Datos • Satélite • GIS</span>
                 <div class="mt-auto text-xs text-slate-400">Vista ilustrativa del panel SustTech</div>
               </div>
             </div>
@@ -141,7 +192,7 @@
       </div>
     </section>
 
-    <!-- Sectores y Áreas Temáticas (layout compacto, 2x5 como EN) -->
+    <!-- Sectores y Áreas Temáticas -->
     <section class="py-8 border-y border-slate-200 bg-slate-50">
       <div class="mx-auto max-w-7xl px-6">
         <p class="text-xs uppercase tracking-wider text-slate-500 mb-3 text-center">
@@ -150,42 +201,21 @@
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 text-slate-700 text-[13px] md:text-sm leading-tight text-center">
           <!-- Sectores -->
-          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">
-            Empresas y cooperativas (de PyMEs a grandes grupos)
-          </div>
-          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">
-            Instituciones financieras
-          </div>
-          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">
-            Inversionistas de impacto
-          </div>
-          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">
-            Agroindustria y cadenas de valor
-          </div>
+          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">Empresas y cooperativas (de PyMEs a grandes grupos)</div>
+          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">Instituciones financieras</div>
+          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">Inversionistas de impacto</div>
+          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">Agroindustria y cadenas de valor</div>
 
-      <!-- Áreas temáticas -->
-        <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">
-          Agua, suelos y biodiversidad
-        </div>
-        <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">
-          Cambio climático
-        </div>
-        <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">
-          Prácticas laborales seguras
-        </div>
-        <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">
-          Gestión ambiental y social
-        </div>
-        <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">
-          Comercio responsable
-        </div>
-        <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">
-          Reportes ESG e impacto
+          <!-- Áreas temáticas -->
+          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">Agua, suelos y biodiversidad</div>
+          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">Cambio climático</div>
+          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">Prácticas laborales seguras</div>
+          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">Gestión ambiental y social</div>
+          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">Comercio responsable</div>
+          <div class="rounded-lg bg-white py-1.5 px-2.5 border border-slate-100">Reportes ESG e impacto</div>
         </div>
       </div>
-    </div>
-  </section>
-
+    </section>
 
     <!-- Servicios -->
     <section id="services" class="py-16 md:py-24 scroll-mt-24">
@@ -312,7 +342,7 @@
     </section>
 
     <!-- Contacto -->
-    <section id="contact" class="py-10 bg-gradient-to-b from-white to-slate-50 scroll-mt-20">
+    <section id="contact" class="py-10 md:py-12 bg-gradient-to-b from-white to-slate-50 scroll-mt-20">
       <div class="mx-auto max-w-3xl px-6">
         <div class="rounded-3xl border border-slate-200 bg-white p-5 md:p-6 shadow-sm">
           <h2 class="text-2xl md:text-3xl font-semibold tracking-tight" data-i18n="contact.title">Conversemos</h2>
@@ -332,7 +362,7 @@
             <p class="mt-3 text-xs text-slate-500 italic" data-i18n="contact.form_note">El formulario a continuación es opcional y puede usarlo si desea estructurar su consulta.</p>
           </div>
 
-          <!-- Form -->
+          <!-- Formulario -->
           <form id="contactForm" class="mt-6 grid gap-4" novalidate>
             <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden">
 
@@ -390,7 +420,7 @@
             <p id="formStatus" class="text-sm mt-3 text-slate-600 hidden" aria-live="polite" role="status"></p>
           </form>
 
-          <!-- Success message (hidden until success) -->
+          <!-- Mensaje de éxito (oculto hasta enviar) -->
           <div id="formSuccess" class="hidden mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-6" role="status" aria-live="polite" tabindex="-1">
             <h3 class="text-lg font-semibold text-emerald-900" data-i18n="msg.success_title">¡Gracias! 🎉</h3>
             <p class="mt-2 text-slate-700" data-i18n="msg.success">Hemos recibido su mensaje y responderemos en 1–2 días hábiles.</p>
@@ -405,9 +435,11 @@
     </section>
   </main>
 
-  <script>
-    lucide.createIcons();
+  <!-- Iconos -->
+  <script>lucide.createIcons();</script>
 
+  <!-- Manejador del formulario -->
+  <script>
     const form = document.getElementById('contactForm');
     const statusEl = document.getElementById('formStatus');
     const successEl = document.getElementById('formSuccess');
@@ -453,35 +485,101 @@
     });
   </script>
 
-  <!-- 2) Language toggle JS (add this) -->
+  <!-- Alternar idioma (escritorio + móvil) -->
   <script>
     (function () {
-      var btn = document.getElementById('lang-toggle');
-      if (!btn) return;
+      const btnDesktop = document.getElementById('lang-toggle');
+      const btnMobile  = document.getElementById('lang-toggle-mobile');
 
       function onES() { return /^\/es(\/|$)/.test(location.pathname); }
 
-      // Button label
-      function setLabel() {
-        btn.textContent = onES() ? 'EN' : 'ES';
-        btn.setAttribute('aria-label', onES() ? 'Switch to English' : 'Cambiar a Español');
+      function setLabel(el) {
+        if (!el) return;
+        el.textContent = onES() ? 'EN' : 'ES';
+        el.setAttribute('aria-label', onES() ? 'Cambiar a inglés' : 'Switch to Spanish');
       }
-      setLabel();
 
-      btn.addEventListener('click', function () {
-        // Always go to the top of the target language page (no hash)
-        var target = onES() ? '/' : '/es/';
-        // Use replace so we don't add an extra history entry
-        location.replace(target);
+      function goToggle() {
+        const target = onES() ? '/' : '/es/';
+        location.replace(target); // ir al inicio de la página destino
+      }
+
+      setLabel(btnDesktop);
+      setLabel(btnMobile);
+
+      btnDesktop && btnDesktop.addEventListener('click', goToggle);
+      btnMobile  && btnMobile.addEventListener('click', goToggle);
+    })();
+  </script>
+
+  <!-- Lógica del menú móvil (accesible, con trap de foco y cierre con Esc/overlay) -->
+  <script>
+    (function () {
+      const body = document.body;
+      const menuBtn = document.getElementById('menu-toggle');
+      const menu    = document.getElementById('mobile-menu');
+      const overlay = document.getElementById('mobile-overlay');
+      const closeBtn= document.getElementById('menu-close');
+
+      const FOCUSABLE = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+      let lastFocused = null;
+
+      function openMenu() {
+        lastFocused = document.activeElement;
+        menu.classList.remove('hidden');
+        body.classList.add('overflow-hidden'); // bloquear scroll de fondo
+        menuBtn.setAttribute('aria-expanded', 'true');
+        menuBtn.setAttribute('aria-label', 'Cerrar menú');
+
+        const first = menu.querySelector(FOCUSABLE);
+        first && first.focus();
+      }
+
+      function closeMenu() {
+        menu.classList.add('hidden');
+        body.classList.remove('overflow-hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.setAttribute('aria-label', 'Abrir menú');
+        lastFocused && lastFocused.focus();
+      }
+
+      function trapFocus(e) {
+        if (menu.classList.contains('hidden') || e.key !== 'Tab') return;
+
+        const focusables = Array.from(menu.querySelectorAll(FOCUSABLE)).filter(el => el.offsetParent !== null);
+        if (!focusables.length) return;
+
+        const first = focusables[0];
+        const last  = focusables[focusables.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      }
+
+      menuBtn && menuBtn.addEventListener('click', () => {
+        if (menu.classList.contains('hidden')) openMenu(); else closeMenu();
+      });
+
+      overlay && overlay.addEventListener('click', closeMenu);
+      closeBtn && closeBtn.addEventListener('click', closeMenu);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !menu.classList.contains('hidden')) closeMenu();
+        if (!menu.classList.contains('hidden')) trapFocus(e);
+      });
+
+      // Cerrar tras navegar a un ancla
+      menu.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', () => { setTimeout(closeMenu, 0); });
       });
     })();
   </script>
 
-
-  <!-- 3) Force language for this page -->
+  <!-- Forzar idioma + i18n -->
   <script>window.__FORCED_LANG__ = 'es';</script>
-  
-  <!-- 4) Load the dictionary swapper -->
   <script src="/assets/i18n/i18n.js"></script>
 </body>
 </html>
