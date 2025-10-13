@@ -428,7 +428,34 @@
     });
   </script>
 
+  <!-- 2) Language toggle JS (add this) -->
+  <script>
+    (function () {
+      var btn = document.getElementById('lang-toggle');
+      if (!btn) return;
+
+      function onES() {
+        return /^\/es(\/|$)/.test(location.pathname);
+      }
+
+      function setLabel() {
+        btn.textContent = onES() ? 'EN' : 'ES';
+        btn.setAttribute('aria-label', onES() ? 'Switch to English' : 'Cambiar a Español');
+      }
+      setLabel();
+
+      btn.addEventListener('click', function () {
+        var hash = location.hash || '';
+        var target = onES() ? '/' : '/es/';
+        location.href = target + hash; // preserve #section anchor
+      });
+    })();
+  </script>
+
+  <!-- 3) Force language for this page -->
   <script>window.__FORCED_LANG__ = 'es';</script>
+  
+  <!-- 4) Load the dictionary swapper -->
   <script src="/assets/i18n/i18n.js"></script>
 </body>
 </html>
