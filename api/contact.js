@@ -73,7 +73,6 @@ export default async function handler(req, res) {
     const SMTP_SECURE = String(process.env.SMTP_SECURE || "false").toLowerCase() === "true";
     const SMTP_USER   = process.env.SMTP_USER   || process.env.M365_USER;
     const SMTP_PASS   = process.env.SMTP_PASS   || process.env.M365_PASS;
-    const SMTP_FROM   = process.env.SMTP_FROM   || process.env.M365_USER || SMTP_USER;
     const CONTACT_TO  = process.env.CONTACT_TO  || process.env.SMTP_TO   || SMTP_USER;
 
     if (!SMTP_USER || !SMTP_PASS) {
@@ -85,8 +84,23 @@ export default async function handler(req, res) {
       port: SMTP_PORT,
       secure: SMTP_SECURE, // false for STARTTLS on 587
       auth: { user: SMTP_USER, pass: SMTP_PASS },
-      tls: { ciphers: "TLSv1.2" }
+      tls: { ciphers: "TLSv1.2" },
+      requireTLS: true,
+      connectionTimeout: 15_000,
+      greetingTimeout: 10_000,
+      socketTimeout: 20_000
     });
+
+    // Verify connection/auth first (gives clearer errors)
+    try {
+      await transporter.verify();
+    } catch (e) {
+      console.error("SMTP verify failed:", e);
+      return res.status(500).json({
+        ok: false,
+        error: `SMTP verify failed: ${e?.code || ""} ${e?.message || e}`
+      });
+    }
 
     const subject = `Nuevo contacto — ${vName}`;
     const text = [
@@ -110,19 +124,30 @@ export default async function handler(req, res) {
       <p style="font-size:12px;color:#64748b">IP: ${escapeHtml(ip)}</p>
     `;
 
-    await transporter.sendMail({
-      from: `"SustTech Contact" <${SMTP_FROM}>`,
-      to: CONTACT_TO,
-      replyTo: vEmail,
-      subject,
-      text,
-      html
-    });
+    // Many M365 tenants require FROM to be the authenticated user
+    const fromAddress = `"SustTech Contact" <${SMTP_USER}>`;
+
+    try {
+      await transporter.sendMail({
+        from: fromAddress,
+        to: CONTACT_TO,
+        replyTo: vEmail,
+        subject,
+        text,
+        html
+      });
+    } catch (e) {
+      console.error("sendMail failed:", e);
+      return res.status(500).json({
+        ok: false,
+        error: `SMTP send failed: ${e?.code || ""} ${e?.response || e?.message || e}`
+      });
+    }
 
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error("Contact API error:", err);
-    return res.status(500).json({ ok: false, error: "Email send failed." });
+    return res.status(500).json({ ok: false, error: `Server error: ${err?.message || err}` });
   }
 }
 
@@ -134,6 +159,4 @@ function escapeHtml(s) {
     .replace(/"/g, "&quot;");
 }
 
-export const config = {
-  api: { bodyParser: { sizeLimit: "100kb" } }
-};
+export const config = { api: { bodyParser: { sizeLimit: "100kb" } } };
