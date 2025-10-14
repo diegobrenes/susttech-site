@@ -72,19 +72,29 @@
       </nav>
 
       <!-- Acciones -->
-      <!-- Language Toggle (Spanish version active) -->
-      <div class="flex items-center border border-slate-300 rounded-full text-sm overflow-hidden">
-        <!-- English (inactive) -->
-        <button onclick="location.replace('/')" 
-            class="px-3 py-1.5 transition-colors text-slate-500 hover:bg-slate-100"
-            aria-label="Switch to English">
-          EN
-        </button>
-      <!-- Spanish (active) -->
-        <button onclick="location.replace('/es/')" 
-            class="px-3 py-1.5 transition-colors font-medium text-slate-900 bg-slate-100 hover:bg-slate-200"
-            aria-label="Idioma actual: Español">
-          ES
+      <!-- Language toggle: dual for desktop, single for mobile -->
+      <div class="flex items-center">
+        <!-- Dual toggle (shown on md+ screens) -->
+        <div class="hidden md:flex items-center border border-slate-300 rounded-full text-sm overflow-hidden">
+          <!-- English (inactive) -->
+          <button onclick="location.replace('/')" 
+              class="px-3 py-1.5 transition-colors text-slate-500 hover:bg-slate-100"
+              aria-label="Switch to English">
+            EN
+          </button>
+          <!-- Spanish (active) -->
+          <button onclick="location.replace('/es/')" 
+              class="px-3 py-1.5 transition-colors font-medium text-slate-900 bg-slate-100 hover:bg-slate-200"
+              aria-label="Idioma actual: Español">
+            ES
+          </button>
+        </div>
+
+        <!-- Single toggle (shown on small screens) -->
+        <button id="lang-toggle-mobile"
+            class="md:hidden rounded-md border border-slate-300 px-3 py-1 text-sm hover:bg-slate-100 transition"
+            aria-label="Cambiar idioma">
+            EN
         </button>
       </div>
     </div>
@@ -466,5 +476,16 @@
   <!-- Forzar idioma + i18n -->
   <script>window.__FORCED_LANG__ = 'es';</script>
   <script src="/assets/i18n/i18n.js"></script>
+  <script>
+    // Mobile language toggle only
+    (function () {
+      const btn = document.getElementById('lang-toggle-mobile');
+      if (!btn) return;
+      const isES = /^\/es(\/|$)/.test(location.pathname);
+      btn.textContent = isES ? 'EN' : 'ES';
+      btn.onclick = () => location.replace(isES ? '/' : '/es/');
+    })();
+  </script>
+
 </body>
 </html>
