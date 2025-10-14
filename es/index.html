@@ -72,13 +72,16 @@
       </nav>
 
       <!-- Acciones -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <!--PLACEHOLDER <a href="#contact" class="hidden lg:inline-block rounded-xl px-4 py-2 bg-slate-900 text-white hover:bg-slate-800 transition focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2">
-          Agenda una llamada
-        </a> -->
-
-        <!-- Alternar idioma -->
-        <button id="lang-toggle" class="shrink-0 whitespace-nowrap rounded-md border border-slate-300 px-2.5 py-1 text-xs sm:text-sm hover:bg-slate-100 transition" aria-label="Cambiar idioma">EN</button>
+      <div class="flex items-center border border-slate-300 rounded-full text-sm overflow-hidden">
+        <button onclick="location.replace('/')" 
+          class="px-3 py-1.5 transition-colors font-medium 
+                 text-slate-900 bg-slate-100 hover:bg-slate-200">
+        EN
+        </button>
+        <button onclick="location.replace('/es/')" 
+          class="px-3 py-1.5 transition-colors text-slate-500 hover:bg-slate-100">
+        ES
+        </button>
       </div>
     </div>
   </header>
