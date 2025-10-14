@@ -72,15 +72,19 @@
       </nav>
 
       <!-- Acciones -->
+      <!-- Language Toggle (Spanish version active) -->
       <div class="flex items-center border border-slate-300 rounded-full text-sm overflow-hidden">
+        <!-- English (inactive) -->
         <button onclick="location.replace('/')" 
-          class="px-3 py-1.5 transition-colors font-medium 
-                 text-slate-900 bg-slate-100 hover:bg-slate-200">
-        EN
+            class="px-3 py-1.5 transition-colors text-slate-500 hover:bg-slate-100"
+            aria-label="Switch to English">
+          EN
         </button>
+      <!-- Spanish (active) -->
         <button onclick="location.replace('/es/')" 
-          class="px-3 py-1.5 transition-colors text-slate-500 hover:bg-slate-100">
-        ES
+            class="px-3 py-1.5 transition-colors font-medium text-slate-900 bg-slate-100 hover:bg-slate-200"
+            aria-label="Idioma actual: Español">
+          ES
         </button>
       </div>
     </div>
