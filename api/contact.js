@@ -14,6 +14,27 @@ function rateLimited(ip) {
   return false;
 }
 
+// ---- simple denylist with TTL ----
+const BLOCK_MS = 60 * 60 * 1000; // 1h
+let blocked = new Map(); // ip -> untilTs
+function isBlocked(ip) {
+  const until = blocked.get(ip);
+  if (until && Date.now() < until) return true;
+  if (until && Date.now() >= until) blocked.delete(ip);
+  return false;
+}
+function punish(ip, ms = BLOCK_MS) { blocked.set(ip, Date.now() + ms); }
+
+// track bad events to trigger punish
+let badHits = [];
+function markBad(ip) {
+  const now = Date.now();
+  badHits.push({ ip, time: now });
+  badHits = badHits.filter(h => now - h.time < 10 * 60 * 1000); // last 10 min
+  const count = badHits.filter(h => h.ip === ip).length;
+  if (count >= 8) punish(ip); // 8 bad actions in 10 min -> block 1h
+}
+
 // ---- field guards ----
 const MAX_MESSAGE_LEN = 5000;
 const MAX_NAME_LEN = 120;
@@ -42,16 +63,26 @@ export default async function handler(req, res) {
       _gotcha = ""
     } = body;
 
+    // honeypot
     if (_gotcha && String(_gotcha).trim()) {
       return res.status(200).json({ ok: true });
     }
 
     const ip = req.headers["x-forwarded-for"]?.split(",")[0]?.trim()
       || req.socket?.remoteAddress || "unknown";
-    
+
+    // fast gates before external call
+    if (isBlocked(ip)) {
+      return res.status(403).json({ ok:false, error:"IP temporarily blocked." });
+    }
+    if (rateLimited(ip)) {
+      return res.status(429).json({ ok: false, error: "Too many requests, try again later." });
+    }
+
     // ---- Cloudflare Turnstile verification ----
     const token = body["cf-turnstile-response"];
     if (!token) {
+      markBad(ip);
       return res.status(400).json({ ok: false, error: "missing_turnstile_token" });
     }
 
@@ -67,15 +98,13 @@ export default async function handler(req, res) {
 
     const data = await verifyRes.json();
     if (!data.success) {
+      markBad(ip);
       console.error("Turnstile failed:", data["error-codes"]);
       return res.status(400).json({ ok: false, error: "turnstile_failed" });
     }
-    // --------------------------------------------    
-    
-      if (rateLimited(ip)) {
-      return res.status(429).json({ ok: false, error: "Too many requests, try again later." });
-    }
+    // --------------------------------------------
 
+    // normalize inputs
     const clean = s => String(s || "").trim();
     const vName = clean(name).slice(0, MAX_NAME_LEN);
     const vEmail = clean(email).toLowerCase();
@@ -83,13 +112,42 @@ export default async function handler(req, res) {
     const vInterest = clean(interest || topic).slice(0, MAX_INTEREST_LEN);
     const vMessage = clean(message).slice(0, MAX_MESSAGE_LEN);
 
+    // required + basic email
     if (!vName || !vEmail || !vMessage) {
       return res.status(400).json({ ok: false, error: "name, email and message are required." });
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(vEmail)) {
+      markBad(ip);
       return res.status(400).json({ ok: false, error: "Invalid email." });
     }
+
+    // --- extra validation (reject random strings, require spaces) ---
+    const hasTwoWords = s => /\S+\s+\S+/.test(s);
+    const tooManyUrls = s => (s.match(/https?:\/\//gi) || []).length > 2;
+    function looksGibberish(s) {
+      const t = String(s || "").replace(/[^a-z]/gi, "");
+      if (!t) return true;
+      const vow = (t.match(/[aeiou]/gi) || []).length;
+      const ratio = vow / t.length;
+      if (ratio < 0.15 || ratio > 0.7) return true;
+      if (/[bcdfghjklmnpqrstvwxyz]{6,}/i.test(t)) return true;
+      if (/^[A-Za-z0-9+/=]{20,}$/.test(s)) return true; // base64-like
+      return false;
+    }
+    if (!hasTwoWords(vName) || looksGibberish(vName)) {
+      markBad(ip);
+      return res.status(400).json({ ok:false, error:"Invalid name." });
+    }
+    if (vOrg && looksGibberish(vOrg)) {
+      markBad(ip);
+      return res.status(400).json({ ok:false, error:"Invalid organization." });
+    }
+    if (vMessage.length < 20 || tooManyUrls(vMessage) || looksGibberish(vMessage)) {
+      markBad(ip);
+      return res.status(400).json({ ok:false, error:"Invalid message." });
+    }
+    // ---------------------------------------------------------------
 
     // ---- env mapping: prefer generic SMTP_* ; fallback to M365_* ----
     const SMTP_HOST   = process.env.SMTP_HOST   || "smtp.office365.com";
@@ -115,7 +173,7 @@ export default async function handler(req, res) {
       socketTimeout: 20_000
     });
 
-    // Verify connection/auth first (gives clearer errors)
+    // verify SMTP early for clearer errors
     try {
       await transporter.verify();
     } catch (e) {
@@ -184,3 +242,4 @@ function escapeHtml(s) {
 }
 
 export const config = { api: { bodyParser: { sizeLimit: "100kb" } } };
+
