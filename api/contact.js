@@ -48,7 +48,31 @@ export default async function handler(req, res) {
 
     const ip = req.headers["x-forwarded-for"]?.split(",")[0]?.trim()
       || req.socket?.remoteAddress || "unknown";
-    if (rateLimited(ip)) {
+    
+    // ---- Cloudflare Turnstile verification ----
+    const token = body["cf-turnstile-response"];
+    if (!token) {
+      return res.status(400).json({ ok: false, error: "missing_turnstile_token" });
+    }
+
+    const verifyRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        secret: process.env.TURNSTILE_SECRET_KEY || "",
+        response: token,
+        remoteip: ip,
+      }),
+    });
+
+    const data = await verifyRes.json();
+    if (!data.success) {
+      console.error("Turnstile failed:", data["error-codes"]);
+      return res.status(400).json({ ok: false, error: "turnstile_failed" });
+    }
+    // --------------------------------------------    
+    
+      if (rateLimited(ip)) {
       return res.status(429).json({ ok: false, error: "Too many requests, try again later." });
     }
 
