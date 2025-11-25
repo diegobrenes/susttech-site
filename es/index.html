@@ -10,11 +10,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- hreflang / canonical -->
   <link rel="alternate" href="https://www.susttech.com/" hreflang="en">
   <link rel="alternate" href="https://www.susttech.com/es/" hreflang="es">
   <link rel="alternate" href="https://www.susttech.com/" hreflang="x-default">
   <link rel="canonical" href="https://www.susttech.com/es/">
+
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-lrjbR0UDFD1asb3r0mmrC.js"></script>
+  <script>
+    window.plausible = window.plausible || function () {
+      (plausible.q = plausible.q || []).push(arguments);
+    };
+    plausible.init = plausible.init || function (opts) {
+      plausible.o = opts || {};
+    };
+    plausible.init();
+  </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -71,7 +84,6 @@
         <a href="#contact"  class="hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 px-1 py-2" data-i18n="nav.contact">Contacto</a>
       </nav>
 
-      <!-- Acciones -->
       <!-- Language toggle: dual for desktop, single for mobile -->
       <div class="flex items-center gap-2 md:gap-3 lg:gap-4 ml-1 md:ml-2">
         <!-- Dual toggle (shown on md+ screens) -->
@@ -443,6 +455,11 @@
         const out = await res.json().catch(() => ({}));
 
         if (res.ok && out.ok) {
+          // Plausible custom event for successful form submission
+          if (typeof plausible === 'function') {
+            plausible('ContactForm_Submit');
+          }
+
           statusEl.classList.add('hidden');
           form.classList.add('hidden');
           successEl.classList.remove('hidden');
