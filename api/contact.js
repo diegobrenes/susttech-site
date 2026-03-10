@@ -99,8 +99,11 @@ export default async function handler(req, res) {
     const data = await verifyRes.json();
     if (!data.success) {
       markBad(ip);
-      console.error("Turnstile failed:", data["error-codes"]);
-      return res.status(400).json({ ok: false, error: "turnstile_failed" });
+      console.error("Turnstile failed:", data);
+      return res.status(400).json({
+        ok:false,
+        error: `turnstile_failed: ${(data["error-codes"] || []).join(",")}`
+      });
     }
     // --------------------------------------------
 
