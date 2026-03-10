@@ -138,7 +138,7 @@ export default async function handler(req, res) {
       if (/^[A-Za-z0-9+/=]{20,}$/.test(s)) return true; // base64-like
       return false;
     }
-    if (!hasTwoWords(vName) || looksGibberish(vName)) {
+    if (vName.length < 2) {
       markBad(ip);
       return res.status(400).json({ ok:false, error:"Invalid name." });
     }
@@ -146,7 +146,7 @@ export default async function handler(req, res) {
       markBad(ip);
       return res.status(400).json({ ok:false, error:"Invalid organization." });
     }
-    if (vMessage.length < 20 || tooManyUrls(vMessage) || looksGibberish(vMessage)) {
+    if (vMessage.length < 8 || tooManyUrls(vMessage)) {
       markBad(ip);
       return res.status(400).json({ ok:false, error:"Invalid message." });
     }
